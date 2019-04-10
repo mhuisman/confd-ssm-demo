@@ -3,11 +3,10 @@ FROM alpine:latest
 ENV ENVIRONMENT=dev
 ENV AWS_DEFAULT_REGION=eu-west-1
 ENV AWS_REGION=eu-west-1
+ENV CONFD_VERSION=0.16.0
 
-RUN apk --update --no-cache add ca-certificates
-
-ARG VERSION=0.16.0
-RUN wget https://github.com/kelseyhightower/confd/releases/download/v${VERSION}/confd-${VERSION}-linux-amd64 -O /usr/local/bin/confd \
+RUN apk --update --no-cache add ca-certificates \
+  && wget https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64 -O /usr/local/bin/confd \
   && chmod +x /usr/local/bin/confd
 
 VOLUME [ "/target" ]
